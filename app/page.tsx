@@ -1,394 +1,288 @@
 "use client"
 
-import { useState } from "react"
+import Image from "next/image"
 import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Heading,
-  Input,
-  Text,
-  VStack,
-  HStack,
-  Badge,
-  Link,
-  SimpleGrid,
-  InputGroup,
-} from "@chakra-ui/react"
-import { ShieldCheck, CheckCircle2, EyeOff, DollarSign, Clock, Globe } from "lucide-react"
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  ShieldCheck,
+  BookOpen,
+  Users,
+  MessageSquare,
+  ChevronRight,
+  Star,
+} from "lucide-react"
 
-export default function FlashUSDTSender() {
-  const [accessKey, setAccessKey] = useState("")
-
-  const bgColor = "gray.900"
-  const cardBg = "gray.800"
-  const textColor = "gray.300"
-
-  const securityFeatures = [
+export default function LandingPage() {
+  const features = [
     {
-      icon: ShieldCheck,
-      title: "Secure Transactions",
-      desc: "End-to-end encryption and secure payment processing with blockchain verification",
+      icon: <BookOpen className="w-8 h-8 text-primary" />,
+      title: "Comprehensive Learning Modules",
+      description:
+        "Explore in-depth modules covering everything from blockchain fundamentals to advanced smart contract development.",
     },
     {
-      icon: Clock,
-      title: "90-Day Validity",
-      desc: "Transactions are valid for 90 days, giving you maximum utility and flexibility",
+      icon: <ShieldCheck className="w-8 h-8 text-primary" />,
+      title: "Secure Sandbox Environment",
+      description:
+        "Practice and experiment in a safe, simulated environment without risking real assets. Our platform ensures your learning is secure.",
     },
     {
-      icon: Globe,
-      title: "Multi-Network Support",
-      desc: "Compatible with multiple blockchain networks including TRC20, ERC20, and more",
-    },
-    {
-      icon: EyeOff,
-      title: "Undetectable Transfers",
-      desc: "100% undetectable cryptocurrency transfers with advanced privacy features",
+      icon: <Users className="w-8 h-8 text-primary" />,
+      title: "Community & Expert Support",
+      description:
+        "Connect with a vibrant community of learners and get guidance from our expert instructors whenever you need it.",
     },
   ]
 
-  const plans = [
+  const testimonials = [
     {
-      title: "Basic",
-      desc: "Essential features for beginners",
-      price: "$250",
-      period: "one-time",
-      features: [
-        "Multi-network support",
-        "Basic security features",
-        "Email support",
-        "Regular updates",
-        "Single device license",
-      ],
-      cta: "Get Started",
-      highlight: false,
+      name: "Alex Johnson",
+      role: "Blockchain Developer",
+      testimonial:
+        "This platform was a game-changer for me. The hands-on labs and clear explanations helped me solidify my understanding of complex concepts.",
+      avatar: "/avatars/alex.jpg",
     },
     {
-      title: "Professional",
-      desc: "Advanced features for serious users",
-      price: "$250",
-      period: "one-time",
-      features: [
-        "Multi-network support",
-        "Advanced security features",
-        "24/7 priority support",
-        "Regular updates",
-        "Multiple device license",
-        "Transaction anonymity",
-        "Custom transaction routing",
-      ],
-      cta: "Get Access Now",
-      highlight: true,
+      name: "Maria Garcia",
+      role: "Cybersecurity Analyst",
+      testimonial:
+        "The focus on security is what drew me in. The modules on secure coding practices are invaluable for anyone in the blockchain space.",
+      avatar: "/avatars/maria.jpg",
     },
     {
-      title: "Enterprise",
-      desc: "Custom solutions for businesses",
-      price: "$250",
-      period: "one-time",
-      features: [
-        "All Professional features",
-        "Dedicated account manager",
-        "Custom integration support",
-        "API access",
-        "Unlimited devices",
-        "Advanced analytics",
-        "Custom branding options",
-      ],
-      cta: "Contact Sales",
-      highlight: false,
+      name: "Sam Chen",
+      role: "Student",
+      testimonial:
+        "As a beginner, I found the platform incredibly approachable. The community is supportive, and the content is top-notch. Highly recommended!",
+      avatar: "/avatars/sam.jpg",
+    },
+  ]
+
+  const faqs = [
+    {
+      question: "What is the primary focus of this platform?",
+      answer:
+        "Our platform is dedicated to providing high-quality education on blockchain technology. We focus on hands-on learning, security best practices, and building a strong foundational knowledge for aspiring developers and enthusiasts.",
+    },
+    {
+      question: "Is this platform suitable for beginners?",
+      answer:
+        "Absolutely. We have learning paths designed for all levels, from absolute beginners to experienced developers looking to upskill. Our introductory modules cover all the basics you need to get started.",
+    },
+    {
+      question: "Are there any prerequisites to join?",
+      answer:
+        "No formal prerequisites are required. A basic understanding of programming concepts can be helpful for the more advanced modules, but we provide resources to help you learn along the way.",
+    },
+    {
+      question: "What kind of support can I expect?",
+      answer:
+        "We offer comprehensive support through our community forums, dedicated Q&A sections with instructors, and email support for any technical issues. Our goal is to ensure you have a smooth learning experience.",
     },
   ]
 
   return (
-    <Box bg={bgColor} minH="100vh">
-      {/* Hero/Login Section */}
-      <Box
-        bgImage="url('/dark-abstract-digital-background-with-gears.jpg')"
-        bgSize="cover"
-        bgPosition="center"
-        minH="100vh"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        position="relative"
-        _before={{
-          content: '""',
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          bg: "blackAlpha.700",
-          zIndex: 1,
-        }}
-      >
-        <Container maxW="md" position="relative" zIndex={2}>
-          <Card.Root bg="blackAlpha.800" backdropFilter="blur(10px)" border="1px solid" borderColor="whiteAlpha.200">
-            <Card.Body>
-              <VStack spacing={6} p={8}>
-                <Box
-                  w={20}
-                  h={20}
-                  bg="teal.500"
-                  rounded="full"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <DollarSign size={40} color="black" />
-                </Box>
+    <div className="flex flex-col min-h-screen bg-background text-foreground">
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative w-full py-20 md:py-32 lg:py-40 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-background to-gray-900/80 z-0"></div>
+          <div className="absolute inset-0 backdrop-blur-sm"></div>
+          <div className="container mx-auto px-4 md:px-6 relative z-10 text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter mb-4 text-shadow-lg">
+              Unlock the Future of Blockchain Technology
+            </h1>
+            <p className="max-w-3xl mx-auto text-lg md:text-xl text-muted-foreground mb-8">
+              An educational platform designed to provide you with the knowledge
+              and skills to excel in the world of decentralized systems.
+            </p>
+            <Button size="lg">
+              Start Learning Now <ChevronRight className="ml-2 w-5 h-5" />
+            </Button>
+            <div className="mt-12 relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-green-400 rounded-lg blur-lg opacity-25"></div>
+              <Image
+                src="https://i.ibb.co/3ypZNvnQ/fake-usdt-transfer-app-for-PC.png"
+                alt="Product screenshot"
+                width={1200}
+                height={675}
+                className="rounded-lg shadow-2xl mx-auto"
+              />
+            </div>
+          </div>
+        </section>
 
-                <VStack spacing={2} textAlign="center">
-                  <Heading size="lg" color="white">
-                    Flash USDT Sender
-                  </Heading>
-                  <Text color="whiteAlpha.700">Fast, secure, and reliable cryptocurrency payment processing</Text>
-                </VStack>
-
-                <VStack spacing={4} w="full">
-                  <Box w="full">
-                    <Text fontSize="sm" color="whiteAlpha.800" mb={2}>
-                      Access Key
-                    </Text>
-                    <InputGroup>
-                      <Input
-                        type="password"
-                        value={accessKey}
-                        onChange={(e) => setAccessKey(e.target.value)}
-                        placeholder="Enter your access key"
-                        bg="blackAlpha.400"
-                        border="1px solid"
-                        borderColor="whiteAlpha.300"
-                        color="white"
-                        _placeholder={{ color: "whiteAlpha.500" }}
-                      />
-                    </InputGroup>
-                  </Box>
-
-                  <Button
-                    w="full"
-                    bg="teal.500"
-                    color="black"
-                    _hover={{ bg: "teal.600" }}
-                    size="lg"
-                    fontWeight="semibold"
-                  >
-                    Authenticate
-                  </Button>
-
-                  <HStack spacing={6} fontSize="sm" color="whiteAlpha.600">
-                    <Text>14433 views</Text>
-                    <Text>0 active</Text>
-                    <Text>0 txns</Text>
-                  </HStack>
-                </VStack>
-              </VStack>
-            </Card.Body>
-          </Card.Root>
-        </Container>
-      </Box>
-
-      {/* Key Features Section */}
-      <Box py={20} bg="gray.900">
-        <Container maxW="6xl">
-          <VStack spacing={12}>
-            <VStack spacing={4} textAlign="center">
-              <Heading size="xl" color="white">
-                Key Features
-              </Heading>
-              <Text color="gray.400" maxW="2xl">
-                Flash USDT Sender comes with powerful features to make your cryptocurrency transactions secure and
-                efficient
-              </Text>
-            </VStack>
-
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={8}>
-              {securityFeatures.map((feature, index) => (
-                <Card.Root key={index} bg="gray.800" border="1px solid" borderColor="gray.700">
-                  <Card.Body>
-                    <VStack spacing={4} p={6} textAlign="center">
-                      <feature.icon size={32} color="#38b2ac" />
-                      <Heading size="md" color="white">
-                        {feature.title}
-                      </Heading>
-                      <Text color="gray.400" fontSize="sm">
-                        {feature.desc}
-                      </Text>
-                    </VStack>
-                  </Card.Body>
-                </Card.Root>
+        {/* Features Section */}
+        <section id="features" className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+                Why Choose Our Platform?
+              </h2>
+              <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                We provide a comprehensive and secure learning environment to
+                help you master blockchain technology.
+              </p>
+            </div>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {features.map((feature, index) => (
+                <Card key={index} className="glass-card">
+                  <CardHeader className="flex flex-row items-center gap-4">
+                    {feature.icon}
+                    <CardTitle>{feature.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">
+                      {feature.description}
+                    </p>
+                  </CardContent>
+                </Card>
               ))}
-            </SimpleGrid>
-          </VStack>
-        </Container>
-      </Box>
+            </div>
+          </div>
+        </section>
 
-      {/* Pricing Section */}
-      <Box py={20} bg="black">
-        <Container maxW="6xl">
-          <VStack spacing={12}>
-            <VStack spacing={4} textAlign="center">
-              <Heading size="xl" color="white">
-                Simple, Transparent Pricing
-              </Heading>
-              <Text color="gray.400">One-time payment for lifetime access to all features</Text>
-            </VStack>
+        {/* About Section */}
+        <section
+          id="about"
+          className="w-full py-12 md:py-24 lg:py-32 bg-gray-900/50"
+        >
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="grid gap-10 lg:grid-cols-2">
+              <div className="space-y-4">
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+                  About Our Mission
+                </h2>
+                <p className="text-muted-foreground">
+                  Our mission is to democratize blockchain education. We believe
+                  that everyone should have access to reliable, high-quality
+                  resources to learn about this transformative technology. We
+                  are committed to fostering a community of learners, builders,
+                  and innovators who will shape the future of the decentralized
+                  web.
+                </p>
+                <p className="text-muted-foreground">
+                  This platform is for educational purposes only. All activities
+                  are conducted in a simulated environment. Users must be 18 or
+                  older.
+                </p>
+              </div>
+              <div className="flex items-center justify-center">
+                <Image
+                  src="/placeholder.svg"
+                  alt="About us"
+                  width={550}
+                  height={310}
+                  className="rounded-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={8}>
-              {plans.map((plan, index) => (
-                <Card.Root
-                  key={index}
-                  bg="gray.800"
-                  border="2px solid"
-                  borderColor={plan.highlight ? "teal.500" : "gray.700"}
-                  transform={plan.highlight ? "scale(1.05)" : "none"}
-                  position="relative"
-                >
-                  {plan.highlight && (
-                    <Badge
-                      position="absolute"
-                      top={-3}
-                      left="50%"
-                      transform="translateX(-50%)"
-                      bg="teal.500"
-                      color="black"
-                      px={3}
-                      py={1}
-                      rounded="full"
-                      fontSize="xs"
-                      fontWeight="bold"
-                    >
-                      MOST POPULAR
-                    </Badge>
-                  )}
-
-                  <Card.Body>
-                    <VStack spacing={6} p={8}>
-                      <VStack spacing={2} textAlign="center">
-                        <Heading size="lg" color="white">
-                          {plan.title}
-                        </Heading>
-                        <Text color="gray.400">{plan.desc}</Text>
-                      </VStack>
-
-                      <VStack spacing={1}>
-                        <Text fontSize="3xl" fontWeight="bold" color="teal.400">
-                          {plan.price}
-                        </Text>
-                        <Text color="gray.500" fontSize="sm">
-                          {plan.period}
-                        </Text>
-                      </VStack>
-
-                      <VStack spacing={3} align="start" w="full">
-                        {plan.features.map((feature, idx) => (
-                          <HStack key={idx} spacing={3}>
-                            <CheckCircle2 size={16} color="#38b2ac" />
-                            <Text color="gray.300" fontSize="sm">
-                              {feature}
-                            </Text>
-                          </HStack>
-                        ))}
-                      </VStack>
-
-                      <Button
-                        w="full"
-                        bg={plan.highlight ? "teal.500" : "gray.700"}
-                        color={plan.highlight ? "black" : "white"}
-                        _hover={{
-                          bg: plan.highlight ? "teal.600" : "gray.600",
-                        }}
-                        size="lg"
-                      >
-                        {plan.cta}
-                      </Button>
-                    </VStack>
-                  </Card.Body>
-                </Card.Root>
+        {/* Testimonials Section */}
+        <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+                What Our Students Say
+              </h2>
+              <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                Hear from developers and students who have grown with our
+                platform.
+              </p>
+            </div>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {testimonials.map((testimonial, index) => (
+                <Card key={index} className="glass-card">
+                  <CardContent className="pt-6">
+                    <div className="space-y-4">
+                      <p className="text-muted-foreground">
+                        "{testimonial.testimonial}"
+                      </p>
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src={testimonial.avatar}
+                          alt={testimonial.name}
+                          width={48}
+                          height={48}
+                          className="rounded-full"
+                        />
+                        <div>
+                          <p className="font-semibold">{testimonial.name}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {testimonial.role}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
-            </SimpleGrid>
-          </VStack>
-        </Container>
-      </Box>
+            </div>
+          </div>
+        </section>
 
-      {/* About/Support Section */}
-      <Box py={20} bg="gray.900">
-        <Container maxW="4xl">
-          <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={8}>
-            <Card.Root bg="gray.800" border="1px solid" borderColor="gray.700">
-              <Card.Body>
-                <VStack spacing={4} p={6} align="start">
-                  <Heading size="md" color="white">
-                    About
-                  </Heading>
-                  <Text color="gray.400" fontSize="sm">
-                    Flash USDT Sender is a secure cryptocurrency transaction tool for multiple blockchain networks
-                    including BTC, ETH, USDT, BNB, SOL, TRX, LTC, DOGE and more.
-                  </Text>
-                  <Text color="gray.500" fontSize="xs">
-                    <strong>Educational Use Only:</strong> This tool is designed for blockchain testing, learning, and
-                    ethical usage. Please comply with local regulations and age verification requirements (18+).
-                  </Text>
-                </VStack>
-              </Card.Body>
-            </Card.Root>
-
-            <Card.Root bg="gray.800" border="1px solid" borderColor="gray.700">
-              <Card.Body>
-                <VStack spacing={4} p={6} align="start">
-                  <Heading size="md" color="white">
-                    Refund Policy
-                  </Heading>
-                  <Text color="gray.400" fontSize="sm">
-                    Due to the digital nature of our product, we do not offer refunds once the access key has been
-                    delivered. Please review the product features before purchase.
-                  </Text>
-                </VStack>
-              </Card.Body>
-            </Card.Root>
-
-            <Card.Root bg="gray.800" border="1px solid" borderColor="gray.700">
-              <Card.Body>
-                <VStack spacing={4} p={6} align="start">
-                  <Heading size="md" color="white">
-                    Support
-                  </Heading>
-                  <Text color="gray.400" fontSize="sm">
-                    Our support team is available 24/7. Contact us via our support page or email us directly.
-                  </Text>
-                  <VStack spacing={2} align="start">
-                    <Link href="/support" color="teal.400" _hover={{ color: "teal.300" }}>
-                      Support Page
-                    </Link>
-                    <Link href="mailto:support@flashusdtsender.xyz" color="teal.400" _hover={{ color: "teal.300" }}>
-                      support@flashusdtsender.xyz
-                    </Link>
-                  </VStack>
-                </VStack>
-              </Card.Body>
-            </Card.Root>
-          </SimpleGrid>
-        </Container>
-      </Box>
+        {/* FAQ Section */}
+        <section
+          id="faq"
+          className="w-full py-12 md:py-24 lg:py-32 bg-gray-900/50"
+        >
+          <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+                Frequently Asked Questions
+              </h2>
+            </div>
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index + 1}`}>
+                  <AccordionTrigger className="text-lg">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </section>
+      </main>
 
       {/* Footer */}
-      <Box py={8} bg="black" borderTop="1px solid" borderColor="gray.800">
-        <Container maxW="6xl">
-          <VStack spacing={4} textAlign="center">
-            <Text color="gray.400">
-              Powered by{" "}
-              <Link href="https://t.me/RecentCoders" color="teal.400" _hover={{ color: "teal.300" }} isExternal>
-                RecentCoders
-              </Link>{" "}
-              — A hub for developers, innovators, and tech enthusiasts shaping the future of coding.
-            </Text>
-            <Text color="gray.500" fontSize="sm">
-              © 2025 Flash USDT Sender. All rights reserved.
-            </Text>
-          </VStack>
-        </Container>
-      </Box>
-    </Box>
+      <footer className="w-full py-6 px-4 md:px-6 border-t border-border">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">
+            © 2025 Blockchain Education Platform. All rights reserved.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Powered by{" "}
+            <a
+              href="#"
+              className="text-primary hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              RecentCoders
+            </a>
+          </p>
+          <div className="flex gap-4">
+            <a href="#" className="text-sm text-muted-foreground hover:text-primary">
+              Privacy Policy
+            </a>
+            <a href="#" className="text-sm text-muted-foreground hover:text-primary">
+              Terms of Service
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
   )
 }
