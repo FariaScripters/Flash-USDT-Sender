@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import { Provider } from "@/components/ui/provider"
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "@/styles/globals.css" // Import globals.css here
 
 const inter = Inter({ subsets: ["latin"] })
@@ -175,6 +177,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider attribute="class" defaultTheme="dark" enableSystem>
           {children}
+          <Analytics />
+          <SpeedInsights />
         </Provider>
       </body>
     </html>
