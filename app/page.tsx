@@ -9,13 +9,17 @@ import {
 } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import {
   ShieldCheck,
   BookOpen,
   Users,
-  MessageSquare,
   ChevronRight,
   Star,
+  CheckCircle2,
+  Info,
+  LifeBuoy,
+  RefreshCw,
 } from "lucide-react"
 
 export default function LandingPage() {
@@ -40,27 +44,68 @@ export default function LandingPage() {
     },
   ]
 
+  const plans = [
+    {
+      title: "Starter",
+      price: "$49",
+      period: "/month",
+      features: [
+        "Access to all basic courses",
+        "Community forum access",
+        "Email support",
+      ],
+      cta: "Choose Plan",
+      highlight: false,
+    },
+    {
+      title: "Pro",
+      price: "$99",
+      period: "/month",
+      features: [
+        "Access to all courses",
+        "Priority support",
+        "Downloadable resources",
+        "Live Q&A sessions",
+      ],
+      cta: "Choose Plan",
+      highlight: true,
+    },
+    {
+      title: "Enterprise",
+      price: "Contact Us",
+      period: "",
+      features: [
+        "All Pro features",
+        "Dedicated account manager",
+        "Custom learning paths",
+        "Team management tools",
+      ],
+      cta: "Contact Sales",
+      highlight: false,
+    },
+  ]
+
   const testimonials = [
     {
       name: "Alex Johnson",
       role: "Blockchain Developer",
       testimonial:
         "This platform was a game-changer for me. The hands-on labs and clear explanations helped me solidify my understanding of complex concepts.",
-      avatar: "/avatars/alex.jpg",
+      avatar: "/placeholder-user.jpg",
     },
     {
       name: "Maria Garcia",
       role: "Cybersecurity Analyst",
       testimonial:
         "The focus on security is what drew me in. The modules on secure coding practices are invaluable for anyone in the blockchain space.",
-      avatar: "/avatars/maria.jpg",
+      avatar: "/placeholder-user.jpg",
     },
     {
       name: "Sam Chen",
       role: "Student",
       testimonial:
         "As a beginner, I found the platform incredibly approachable. The community is supportive, and the content is top-notch. Highly recommended!",
-      avatar: "/avatars/sam.jpg",
+      avatar: "/placeholder-user.jpg",
     },
   ]
 
@@ -74,16 +119,6 @@ export default function LandingPage() {
       question: "Is this platform suitable for beginners?",
       answer:
         "Absolutely. We have learning paths designed for all levels, from absolute beginners to experienced developers looking to upskill. Our introductory modules cover all the basics you need to get started.",
-    },
-    {
-      question: "Are there any prerequisites to join?",
-      answer:
-        "No formal prerequisites are required. A basic understanding of programming concepts can be helpful for the more advanced modules, but we provide resources to help you learn along the way.",
-    },
-    {
-      question: "What kind of support can I expect?",
-      answer:
-        "We offer comprehensive support through our community forums, dedicated Q&A sections with instructors, and email support for any technical issues. Our goal is to ensure you have a smooth learning experience.",
     },
   ]
 
@@ -148,46 +183,131 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* About Section */}
+        {/* About, Support, Refund Section */}
         <section
           id="about"
           className="w-full py-12 md:py-24 lg:py-32 bg-gray-900/50"
         >
           <div className="container mx-auto px-4 md:px-6">
-            <div className="grid gap-10 lg:grid-cols-2">
-              <div className="space-y-4">
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
-                  About Our Mission
-                </h2>
-                <p className="text-muted-foreground">
-                  Our mission is to democratize blockchain education. We believe
-                  that everyone should have access to reliable, high-quality
-                  resources to learn about this transformative technology. We
-                  are committed to fostering a community of learners, builders,
-                  and innovators who will shape the future of the decentralized
-                  web.
-                </p>
-                <p className="text-muted-foreground">
-                  This platform is for educational purposes only. All activities
-                  are conducted in a simulated environment. Users must be 18 or
-                  older.
-                </p>
-              </div>
-              <div className="flex items-center justify-center">
-                <Image
-                  src="/placeholder.svg"
-                  alt="About us"
-                  width={550}
-                  height={310}
-                  className="rounded-lg"
-                />
-              </div>
+            <div className="grid gap-10 lg:grid-cols-3">
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Info className="w-6 h-6 text-primary" /> About Us
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Our mission is to democratize blockchain education. We
+                    provide reliable, high-quality resources to foster a
+                    community of learners and innovators.
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Trust indicators: Certified instructors, University
+                    partnerships, Secure SSL encryption.
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Educational Use Only. 18+
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <LifeBuoy className="w-6 h-6 text-primary" /> Support
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Our support team is available 24/7. Contact us via our
+                    support page or email us directly for any inquiries.
+                  </p>
+                  <Button variant="outline" size="sm">
+                    Contact Support
+                  </Button>
+                </CardContent>
+              </Card>
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <RefreshCw className="w-6 h-6 text-primary" /> Refund
+                    Policy
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">
+                    We offer a 30-day money-back guarantee on all our monthly
+                    plans. If you're not satisfied, contact us for a full
+                    refund.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section id="pricing" className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
+                Flexible Pricing for Everyone
+              </h2>
+              <p className="max-w-2xl mx-auto text-muted-foreground mt-4">
+                Choose a plan that fits your learning goals and budget.
+              </p>
+            </div>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {plans.map((plan, index) => (
+                <Card
+                  key={index}
+                  className={`glass-card flex flex-col ${
+                    plan.highlight ? "border-primary" : ""
+                  }`}
+                >
+                  {plan.highlight && (
+                    <Badge className="absolute -top-3 self-center">
+                      Most Popular
+                    </Badge>
+                  )}
+                  <CardHeader className="text-center">
+                    <CardTitle>{plan.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow flex flex-col justify-between">
+                    <div>
+                      <div className="text-4xl font-bold text-center mb-4">
+                        {plan.price}
+                        <span className="text-lg font-normal text-muted-foreground">
+                          {plan.period}
+                        </span>
+                      </div>
+                      <ul className="space-y-2 text-muted-foreground">
+                        {plan.features.map((feature, fIndex) => (
+                          <li key={fIndex} className="flex items-center gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-primary" />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <Button
+                      className="w-full mt-6"
+                      variant={plan.highlight ? "default" : "outline"}
+                    >
+                      {plan.cta}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Testimonials Section */}
-        <section id="testimonials" className="w-full py-12 md:py-24 lg:py-32">
+        <section
+          id="testimonials"
+          className="w-full py-12 md:py-24 lg:py-32 bg-gray-900/50"
+        >
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
@@ -230,10 +350,7 @@ export default function LandingPage() {
         </section>
 
         {/* FAQ Section */}
-        <section
-          id="faq"
-          className="w-full py-12 md:py-24 lg:py-32 bg-gray-900/50"
-        >
+        <section id="faq" className="w-full py-12 md:py-24 lg:py-32">
           <div className="container mx-auto px-4 md:px-6 max-w-3xl">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">
@@ -265,7 +382,7 @@ export default function LandingPage() {
           <p className="text-sm text-muted-foreground">
             Powered by{" "}
             <a
-              href="#"
+              href="https://recentcoders.com"
               className="text-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"
@@ -274,10 +391,16 @@ export default function LandingPage() {
             </a>
           </p>
           <div className="flex gap-4">
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary">
+            <a
+              href="/privacy"
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
               Privacy Policy
             </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary">
+            <a
+              href="/terms"
+              className="text-sm text-muted-foreground hover:text-primary"
+            >
               Terms of Service
             </a>
           </div>
